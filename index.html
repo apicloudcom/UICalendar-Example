@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="tephone=no,email=no,date=no,address=no">
+		<style type="text/css">
+			html{ background-color: white; }
+			header{ border-bottom: 1px solid #ccc; padding: 25px 0; }
+			span {
+                padding: 10px 15px;
+				margin: 10px;
+				display: inline-block;
+				background-color: #e8e8e8;
+			}
+            .hover{ opacity: .4; }
+		</style>
+	</head>
+	<body style="padding-bottom: 340px;">
+		<div class="main">
+			<header>
+				<h1>UICalendar</h1>
+				<mark>
+					使用前请详细阅读 文档 使用规则
+				</mark>
+			</header>
+			<span tapmode="hover" onclick="fnOpen()">open()</span>
+			<span tapmode="hover" onclick="fnSetSpecialDates()">setSpecialDates()</span>
+			<span tapmode="hover" onclick="fnCancelSpecialDates()">cancelSpecialDates()</span>
+			<span tapmode="hover" onclick="fnClose()">close()</span>
+			<span tapmode="hover" onclick="fnShow()">show()</span>
+			<span tapmode="hover" onclick="fnHide()">hide()</span>
+			<span tapmode="hover" onclick="fnNextMonth()">nextMonth()</span>
+			<span tapmode="hover" onclick="fnPrevMonth()">prevMonth()</span>
+			<span tapmode="hover" onclick="fnNextYear()">nextYear()</span>
+			<span tapmode="hover" onclick="fnPrevYear()">prevYear()</span>
+			<span tapmode="hover" onclick="fnSetDate()">setDate()</span>
+			<span tapmode="hover" onclick="fnTurnPage()">turnPage()</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var UICalendar;
+		apiready = function() {
+			UICalendar = api.require('UICalendar');
+		};
+
+		function fnOpen(){
+			UICalendar.open({
+			    rect: {
+			        x: 30,
+			        y: document.querySelector( '.main' ).offsetHeight,
+			        w: api.frameWidth - 60,
+			        h: 340
+			    },
+			    styles: {
+			        bg: '#fff',
+			        week: {
+			            weekdayColor: '#3b3b3b',
+			            weekendColor: '#a8d400',
+			            size: 12
+			        },
+			        date: {
+			            color: '#3b3b3b',
+			            selectedColor: '#fff',
+			            selectedBg: '#a8d500',
+			            size: 12
+			        },
+			        today: {
+			            color: 'rgb(230,46,37)',
+			            bg: ''
+			        },
+			        specialDate: {
+			            color: '#fff'
+			        }
+			    },
+			    specialDate: [{
+			        date: '2016-06-30'
+			    }],
+			    switchMode: 'vertical',
+			    fixed: false
+			}, function(ret, err){
+			    if( ret ){
+			         alert( JSON.stringify( ret ) );
+			    }else{
+			         alert( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		function fnSetSpecialDates(){
+			UICalendar.setSpecialDates({
+			    specialDates:[{
+			       date: '2016-05-29',
+			       color: '#fff',
+			       bg: '#0f0'
+			    },{
+			       date: '2016-05-31',
+			       color: '#fff',
+			       bg: '#0f0'
+			    }]
+			});
+		}
+
+		function fnCancelSpecialDates(){
+			UICalendar.cancelSpecialDates({
+			    specialDates:['2016-05-29','2016-05-31']
+			});
+		}
+
+		function fnClose(){
+			UICalendar.close();
+		}
+
+		function fnShow(){
+			UICalendar.show();
+		}
+
+		function fnHide(){
+			UICalendar.hide();
+		}
+
+		function fnNextMonth(){
+			UICalendar.nextMonth(function(ret, err){      
+			    if( ret ){
+			        alert( JSON.stringify( ret ) );
+			    }else{
+			        alert( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		function fnPrevMonth(){
+			UICalendar.prevMonth(function(ret, err){      
+			    if( ret ){
+			        alert( JSON.stringify( ret ) );
+			    }else{
+			        alert( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		function fnNextYear(){
+			UICalendar.nextYear(function(ret, err){      
+			    if( ret ){
+			        alert( JSON.stringify( ret ) );
+			    }else{
+			        alert( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		function fnPrevYear(){
+			UICalendar.prevYear(function(ret, err){      
+			    if( ret ){
+			        alert( JSON.stringify( ret ) );
+			    }else{
+			        alert( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		function fnSetDate(){
+			UICalendar.setDate({
+			    date: '2015-08-08',
+			    ignoreSelected: false
+			}, function(ret, err){      
+			    if( ret.status ){
+			        alert( JSON.stringify( ret ) );
+			    }else{
+			        alert( JSON.stringify( err ) );
+			    }
+			});
+		}
+
+		function fnTurnPage(){
+			UICalendar.turnPage({
+			    date: '2015-08'
+			});
+		}
+	</script>
+</html>
